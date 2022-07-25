@@ -107,8 +107,8 @@ ent_senha.place(x=80, y=67 )
 novo_us=customtkinter.CTkButton(root, text="Novo usuário",bg=corbt, width=10, height=10,command=cadastrar)
 novo_us.place(x=14, y=100)
 #botâo login
-log=customtkinter.CTkButton(root, text="Login", bg=corbt,width=10, height=10 ,command=buscar_login)
-log.place(x=130, y=100)
+login=customtkinter.CTkButton(root, text="Login", bg=corbt,width=10, height=10 ,command=buscar_login)
+login.place(x=130, y=100)
 #botâo logout
 sair=customtkinter.CTkButton(root, text="Sair",bg=corbt,width=10, height=10 ,command=root.destroy,)
 sair.place(x=210, y=100)
