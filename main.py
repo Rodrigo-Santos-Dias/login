@@ -6,12 +6,6 @@ import re
 
 def cadastrar():
     global user
-    global senha_user
-    global ent_log
-    global ent_log
-    global cursor
-    global comando
-    global conexao
     conexao =mysql.connector.connect (
     host='localhost',
     user='root',
@@ -32,14 +26,20 @@ def cadastrar():
     if cadastr[0]=='' or cadastr[1] == '':
         return tkinter.messagebox.showwarning(title='Aviso de erro ',message='Os campos de login e senha devem estar preenchidos!!!')
     elif cadastr[0] == cadastr[1]:
+        ent_log.delete(0,END)
+        ent_senha.delete(0,END)
         return tkinter.messagebox.showwarning(message='Usuário e senha devem ser diferentes!!!')
     elif chek_email(cadastr[0]) == False:
+        ent_log.delete(0, END)
+        ent_senha.delete(0, END)
         return tkinter.messagebox.showwarning(message='Por Favor utilize um e-mail valido !!!')
     else:
         cursor = conexao.cursor()
         comando = f'INSERT INTO usuarios(nome,senha)VALUES ("{cadastr[0]}","{cadastr[1]}")'
         cursor.execute(comando)
         conexao.commit()
+        ent_log.delete(0, END)
+        ent_senha.delete(0, END)
         return tkinter.messagebox.showinfo(message=f'Cadastro realizado com sucesso!')
 
 
@@ -47,13 +47,7 @@ def cadastrar():
 
 def buscar_login():
     global user
-    global senha_user
-    global ent_log
-    global ent_log
-    global cursor
-    global comando
-    global conexao
-    conexao =mysql.connector.connect (
+    conexao =mysql.connector.connect(
     host='localhost',
     user='root',
     password='Rodrigo1995@',
@@ -62,6 +56,8 @@ def buscar_login():
 )
     cadastr= (ent_log.get(),ent_senha.get())
     if cadastr[0]=='' or cadastr[1] == '':
+        ent_log.delete(0, END)
+        ent_senha.delete(0, END)
         return tkinter.messagebox.showwarning(title='Aviso de erro ',message='Os campos de login e senha devem estar preenchidos!!!')
     else:
         cursor = conexao.cursor()
@@ -72,11 +68,14 @@ def buscar_login():
             if cadastr[0] and cadastr[1] in c:
                 user= c
         if user in resultado:
+            ent_log.delete(0, END)
+            ent_senha.delete(0, END)
             return tkinter.messagebox.showinfo(message=f'Login efetuado com sucesso seja bem vindo {user[0]}!')
         else:
+            ent_log.delete(0, END)
+            ent_senha.delete(0, END)
             return tkinter.messagebox.showwarning(message=f'Senha ou e-mail incorretos!')
-    ent_log.insert(0, '')
-    ent_senha.insert(0, '')
+
 
 
 
@@ -84,8 +83,8 @@ def buscar_login():
 
 cor = '#60a3c4'
 corbt= '#134c69'
-user = 'yfffy'
-customtkinter.set_appearance_mode("system")
+user = ""
+customtkinter.set_appearance_mode("light")
 root = customtkinter.CTk()
 root.geometry(f"{300}x{140}")
 root.config(bg=cor)
